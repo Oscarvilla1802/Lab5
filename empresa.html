@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cálculo de Sueldo de Vendedor</title>
+</head>
+<body>
+    <h1>Cálculo de Sueldo de Vendedor</h1>
+    <form action="" method="post">
+        <label for="ventas">Importe total vendido del mes (S/.):</label>
+        <input type="number" name="ventas" required>
+        <br>
+        <label for="hijos">Cantidad de hijos en edad escolar:</label>
+        <input type="number" name="hijos" required>
+        <br>
+        <input type="submit" value="Calcular Sueldo">
+    </form>
+    
+    <?php
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["ventas"]) && isset($_POST["hijos"])) {
+        // Obtener los valores ingresados en el formulario
+        $ventas = $_POST["ventas"];
+        $hijos = $_POST["hijos"];
+        
+        // Calcular la bonificación
+        $bonificacion = $hijos * 50;
+        
+        // Calcular la comisión
+        $comision = $ventas * 0.075;
+        
+        // Calcular el sueldo bruto
+        $sueldo_bruto = 600 + $comision + $bonificacion;
+        
+        // Calcular el descuento
+        $descuento = $sueldo_bruto * 0.11;
+        
+        // Calcular el sueldo neto
+        $sueldo_neto = $sueldo_bruto - $descuento;
+        
+        // Mostrar los resultados
+        echo "<h2>Resultados:</h2>";
+        echo "Bonificación: S/. $bonificacion<br>";
+        echo "Comisión: S/. $comision<br>";
+        echo "Sueldo Bruto: S/. $sueldo_bruto<br>";
+        echo "Descuento: S/. $descuento<br>";
+        echo "Sueldo Neto: S/. $sueldo_neto";
+    }
+    ?>
+</body>
+</html>
+

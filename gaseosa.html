@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculadora de Gaseosas</title>
+</head>
+<body>
+    <h1>Calculadora de Gaseosas</h1>
+    <form action="" method="post">
+        <label for="precio_actual">Precio actual de la gaseosa (S/.):</label>
+        <input type="number" step="0.01" name="precio_actual" required>
+        <br>
+        <label for="cantidad">Cantidad de gaseosas adquiridas:</label>
+        <input type="number" name="cantidad" required>
+        <br>
+        <input type="submit" value="Calcular">
+    </form>
+    
+    <?php
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["precio_actual"]) && isset($_POST["cantidad"])) {
+        // Obtener los valores ingresados en el formulario
+        $precio_actual = $_POST["precio_actual"];
+        $cantidad = $_POST["cantidad"];
+        
+        // Calcular el nuevo precio con el descuento del 5%
+        $nuevo_precio = $precio_actual - ($precio_actual * 0.05);
+        
+        // Calcular el importe de la compra
+        $importe_compra = $nuevo_precio * $cantidad;
+        
+        // Calcular el importe del descuento del 7%
+        $descuento = $importe_compra * 0.07;
+        
+        // Calcular el importe a pagar
+        $importe_pagar = $importe_compra - $descuento;
+        
+        // Calcular el obsequio de dos caramelos por cada gaseosa
+        $obsequio = $cantidad * 2;
+        
+        // Mostrar los resultados
+        echo "<h2>Resultados:</h2>";
+        echo "Nuevo precio de la gaseosa: S/. $nuevo_precio<br>";
+        echo "Importe de la compra: S/. $importe_compra<br>";
+        echo "Importe del descuento: S/. $descuento<br>";
+        echo "Importe a pagar: S/. $importe_pagar<br>";
+        echo "Obsequio: $obsequio caramelos";
+    }
+    ?>
+</body>
+</html>
